@@ -18,31 +18,26 @@ The steps in this project are :
 
 
 ### Camera Calibration
-In this step, I used the OpenCV functions findChessboardCorners and drawChessboardCorners to identify the locations of corners on a series of pictures of a chessboard taken from different angles.  The output of chessboard corners are then  used by cv2.calibrateCamera to compute the camera calibration matrix and distortion coefficients.
+Camera calibration is needed to accurately detect locations on images taken from different angles and allow any images with distortion to be accuratley undistorted. The OpenCV functions `cv2.findChessboardCorners` and `cv2.drawChessboardCorners` are used to identify the locations of corners on a series of pictures of a chessboard taken from different angles.  The output of chessboard corners are then  used by `cv2.calibrateCamera` to compute the camera calibration matrix and distortion coefficients.
 Details about Camera calibration can be found here: [OpenCV Camera Calibration](https://docs.opencv.org/2.4/doc/tutorials/calib3d/camera_calibration/camera_calibration.html)
 **Example: Calibrated camera image**
-![Alt text](writeup_images/original_and_calibrated.JPG "Calibrated Camera Image")
-
+![Alt text](writeup_images/original_and_calibrated_chessboard.JPG "Calibrated Camera Image")
 
 ### Distortion Correction 
-The camera calibration matrix and distortion coefficients are then used with the OpenCV function cv2.undistort() to remove distortion from the images.
+The camera calibration matrix and distortion coefficients obtained in the camera calibration stage are used with the OpenCV function `cv2.undistort()` to remove distortion from the images.
 **Example: Distorted corrected image** 
 ![Alt text](writeup_images/original_and_undistorted.JPG "Distorted Corrected Image")
 
 ### Perspective Transform 
-The perspective transform takes a distorted corrected image and transforms it show the birds eye view of the road. This allows the lane lines to appear more parallel and not converging. The OpenCV get.getPerspectiveTransform() and cv2.warpPerspective() are used to get the perspective view.  The algorithm takes the undistorted image as input along with four source points and four destination points which are manually selected by visual inspection of the source image, and then the algorithm remaps or warps the image.
-
+The perspective transform takes a distorted corrected image and transforms it to show the birds eye view of the road. This allows the lane lines to appear more parallel and not converging. The OpenCV `get.getPerspectiveTransform` and `cv2.warpPerspective` are used to get the perspective view.  The algorithm takes the undistorted image as input along with four source points and four destination points which are manually selected by visual inspection of the source image, and then the algorithm remaps or warps the image.
 **Example: Perspective transform** 
 ![Alt text](writeup_images/original_and_perspective.JPG "Perspective View Image")
 
 ### Explore Color and Gradient Selection 
-The pupose of this step is explore various color spaces and channels that provide the best match for lane detection under various lighting and shading conditions. 
-The lesson made a good case for converting to HLS color space and than selecting S channel.  I first performed this step and the S channel and experimented with differnt threshold levels and found that a min threshold of 150 worked well for detecting yellow lanes across all images, however it didnt work so well for white dashed lanes.
+The purpose of this step is to explore various color spaces and channels that provide the best match for lane detection under various lighting and shading conditions. 
+The lesson made a good case for converting to HLS color space and than selecting the S channel.  I first performed this step and the S channel and experimented with differnt threshold levels and found that a min threshold of 150 worked well for detecting yellow lanes across all images, however it didnt work so well for white dashed lanes.  For the white lanes I tried HSV, YUV colorspace, but then tried LUV colorspace and I found the L Channel from the LUV color space performed well on the dashed white lane lines. I spent a lot time on changing color spaces and threshold, but I felt using L channel the LUV space was as good as I could get for white lanes. At this point I decided to combine the S-channel for yellow lanes and L-Channel for white lanes and for a complete lane detection thesholding
 
-For the white lanes I tried HSV, YUV colorspace, but then tried LUV colorspace and I found the L Channel from the LUV color space performed well of the dashed white lane lines. I spent a lot time on changing color spaces and threshold, but I felt using L channel the LUV space was as good as I could get for white lanes. At this point I decided to combine the S-channel for yellow lanes and L-Channel for white lanes and for a complete lane detection thesholding
-
-This project used Sobel edge detection to find line edges: [OpenCV Sobel]( https://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/sobel_derivatives/sobel_derivatives.html). Each image is converted to gray scale and the sobel operators are used to find the edges.
-The gradient and colot spaces are then combined to complete this step
+This project used Sobel edge detection to find line edges: [OpenCV Sobel]( https://docs.opencv.org/2.4/doc/tutorials/imgproc/imgtrans/sobel_derivatives/sobel_derivatives.html). Each image is converted to gray scale and the sobel operators are used to find the edges. The gradient and colot spaces are then combined to complete this step
 **Example: Color and Gradient selection**
 ![Alt text](writeup_images/color_and_gradient.JPG "Color and Gradient Image")
 
@@ -50,17 +45,16 @@ The gradient and colot spaces are then combined to complete this step
 ### Detect lanes
 
 The next step was to fit a polynomial to each lane line, which was done by:
-
 Identifying peaks in a histogram of the image to determine location of lane lines.
 Identifying all non zero pixels around histogram peaks using the numpy function numpy.nonzero().
 Fitting a polynomial to each lane using the numpy function numpy.polyfit().
 After fitting the polynomials I was able to calculate the position of the vehicle with respect to center with the following calculations:
 
 **Example: Blind Search Line Fit**
-![Alt text](writeup_images/blind_search_line_fit.JPG "Blind Search Line Fit")
+![Alt text](writeup_images/blind_search_line_fitting.JPG "Blind Search Line Fit")
 
 **Example: Found Search Line Fit**
-![Alt text](writeup_images/found_search_line_fit.JPG "Found Search Line Fit")
+![Alt text](writeup_images/found_search_line_fittin.JPG "Found Search Line Fit")
 
 ### Determine the radius of curvature and center offset for the car.
 
@@ -72,6 +66,8 @@ The jupyter notebook can be found here  [AdvancedLaneLines.ipynb](https://github
 ## Create a Class Line().
 
 ### Conclusion
-I learned a lot of new concepts on this project. I spent most of the times exploring color space and finding an elegant solution to line fitting. I made videos for for both the project and challenge videos.
+I learned a lot of new concepts on this project. I spent most of the times exploring color space and finding an elegant solution to line fitting. I noticed the projection polgon leans slightly to the right sometimes. Videos for lane projection can be found here:
+[project_video_out.mp4] (https://github.com/jfoshea/SDC-AdvancedLaneLines/blob/master/project_video_output.mp4)
+[challenge_video_out.mp4] (https://github.com/jfoshea/SDC-AdvancedLaneLines/blob/master/challenge_video_output.mp4)
 
 

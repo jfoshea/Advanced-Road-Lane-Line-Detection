@@ -49,11 +49,7 @@ This project used Sobel edge detection to find line edges: [OpenCV Sobel]( https
 
 ### Detect lanes
 
-The next step was to fit a polynomial to each lane line, which was done by:
-Identifying peaks in a histogram of the image to determine location of lane lines.
-Identifying all non zero pixels around histogram peaks using the numpy function numpy.nonzero().
-Fitting a polynomial to each lane using the numpy function numpy.polyfit().
-After fitting the polynomials I was able to calculate the position of the vehicle with respect to center with the following calculations:
+The next step was to fit a polynomial to each lane line, which was done by identifying peaks in a histogram of the image to determine location of lane lines. Next all non zero pixels around histogram peaks using the numpy function numpy.nonzero(). Then fit a polynomial to each lane using the numpy function `numpy.polyfit()`.  After fitting the polynomials I was able to calculate the position of the vehicle with respect to center with the following calculations. For this section I took the suggested blind search and found search code in the lesson as a starting point, I wanted to restructure the code to make it more readable to me, and I also took inspiration [github](https://github.com/georgesung/advanced_lane_detection) which was close to my initial implementaion.
 
 **Example: Blind Search Line Fit**
 ![Alt text](writeup_images/blind_search_line_fitting.JPG "Blind Search Line Fit")

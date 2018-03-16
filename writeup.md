@@ -2,7 +2,7 @@
 
 ## Overview
 Develop a more advanced lane line detection system. The project first discusses camera calibration and how to correct image distortion on the edges of images Next the perspective transform is disccused to get a birds eye view of each image this will provide more accurate lane detection. Gradient edge detection and different color spaces are then explored to determine which color spaces/channels are best for detecting lane colors accounting for differnt lighting and shadows. After we detected lane edges from the birds eye view we then search for lines from pixel intensities on the image and then apply curve fitting techniques to draw lines. Finally we implemeent a video pipeline that reads each image processs the image for lane finding and apply the extrapolated lines and predictions back on the original (unwarped) image.Many aspects of OpenCV, python, numpy, and matplotlib are used to develop the lane finder. The jupyter notebook can be found here: 
-[AdvancedLaneLines.ipynb](https://github.com/jfoshea/AdvancedLaneLines/blob/master/AdvancedLaneLines.ipynb)
+[AdvancedLaneLines.ipynb](https://github.com/jfoshea/SDC-AdvancedLaneLines/blob/master/AdvancedLaneLines.ipynb)
 
 The steps in this project are :
 - Camera Calibration
@@ -65,7 +65,7 @@ The code for radius of curvature and center_offset can be found in
 A detailed writeup of the pipeline construction and challenges are located here: 
 [writeup] (https://github.com/jfoshea/SDC-FindingLaneLines/blob/master/writeup.md)
 The jupyter notebook can be found here:
-[AdvancedLaneLines.ipynb](https://github.com/jfoshea/AdvancedLaneLines/blob/master/AdvancedLaneLines.ipynb)
+[AdvancedLaneLines.ipynb](https://github.com/jfoshea/SDC-AdvancedLaneLines/blob/master/AdvancedLaneLines.ipynb)
 
 ### Conclusion
 I learned a lot of new concepts on this project. I spent most of the times exploring color space and finding an elegant solution to line fitting. I noticed the projection polgon leans slightly to the right sometimes. Videos for lane projection can be found here:

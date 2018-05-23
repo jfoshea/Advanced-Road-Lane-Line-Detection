@@ -11,7 +11,7 @@ The following steps are used to run the pipeline:
     ```
 2. Clone the SDC-AdvancedLaneLines git repository
     ```  
-    $  git clone https://github.com/jfoshea/SDC-AdvancedLaneLines.git
+    $  git clone https://github.com/jfoshea/Advanced-Road-Lane-Line-Detection.git
     ```
 
 3. enable cardnd-term1 virtualenv
@@ -24,9 +24,9 @@ The following steps are used to run the pipeline:
     ```
 
 The output videos are:
-[project_video_out.mp4] (https://github.com/jfoshea/SDC-AdvancedLaneLines/blob/master/project_video_output.mp4)
-[challenge_video_out.mp4] (https://github.com/jfoshea/SDC-AdvancedLaneLines/blob/master/challenge_video_output.mp4)
+[project_video_out.mp4] (https://github.com/jfoshea/Advanced-Road-Lane-Line-Detection/blob/master/project_video_output.mp4)
+[challenge_video_out.mp4] (https://github.com/jfoshea/Advanced-Road-Lane-Line-Detection/blob/master/challenge_video_output.mp4)
 
 ## Writeup 
-A detailed writeup are located here [writeup] (https://github.com/jfoshea/SDC-AdvancedLaneLines/blob/master/writeup.md)
+A detailed writeup are located here [writeup] (https://github.com/jfoshea/Advanced-Road-Lane-Line-Detection/blob/master/writeup.md)
 
